@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weatherly — Map Based Weather App</title>
+    <link rel="stylesheet" href="css/style.css">
+
+    <!-- Leaflet Map CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+</head>
+<body>
+    <!-- Background Map -->
+    <div id="map"></div>
+
+    <main class="container">
+
+        <header class="header">
+            <h1>Weather</h1>
+            <p id="dateTime" class="datetime"></p>
+            <p style="color: #000" class="sub">Search a city or click on map to get weather</p>
+        </header>
+
+        <!-- Search | ForeCast | Result -->
+        <div class="content">
+            <div class="left-panel">
+                <section class="search-card">
+                    <div class="search-row">
+                        <input id="cityInput" type="text" placeholder="e.g. Mumbai, IN">
+                        <button id="searchBtn">Submit</button>
+                    </div>
+
+                    <div class="options-row">
+                        <button id="geoBtn">Current Location</button>
+
+                        <div class="unit-toggle">
+                        <span>Units:</span>
+                        <button class="unit active" data-unit="metric">°C</button>
+                        <button class="unit" data-unit="imperial">°F</button>
+                        </div>
+                    </div>
+
+                    <div id="message"></div>
+                </section>
+
+                <section id="forecast" class="forecast" hidden>
+                    <h3 class="forecast-title">5-Day Forecast</h3>
+                    <div id="forecastGrid" class="forecast-grid"></div>
+                </section>
+            </div>
+
+            <section id="result" class="result" hidden>
+                <div class="weather-card">
+                    <div class="left">
+                        <img id="weatherIcon" alt="Weather Icon" width="100" />
+                        <div class="temp" id="temp">--°</div>
+                        <div class="desc" id="desc">--</div>
+                    </div>
+
+                    <div class="right">
+                        <p><strong>Location:</strong> <span id="locationName">--</span></p>
+                        <p><strong>Feels Like:</strong> <span id="feelsLike">--</span></p>
+                        <p><strong>Humidity:</strong> <span id="humidity">--</span>%</p>
+                        <p><strong>Wind:</strong> <span id="wind">--</span></p>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <small style="color: #000">Weather data © OpenWeatherMap | Map © OpenStreetMap contributors</small>
+        </footer>
+    </main>
+
+    <!-- Leaflet JS -->
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
+    <script src="js/storage.js"></script>
+
+    <script src="js/api.js"></script>
+
+    <script src="js/app.js"></script>
+</body>
+</html>
