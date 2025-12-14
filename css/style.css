@@ -313,6 +313,10 @@ button {
     .result {
         width: 100%;
     }
+
+    .forecast {
+        width: 410px;
+    }
 }
 
 @media (max-width: 400px) {
@@ -362,6 +366,10 @@ button {
     .forecast, 
     .result {
         width: 100%;
+    }
+
+    .forecast {
+        width: 410px;
     }
 
     .header h1 {
