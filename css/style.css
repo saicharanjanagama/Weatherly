@@ -152,8 +152,9 @@ button {
     background: var(--glass);
     padding:0 18px;
     border-radius: var(--radius);
-    max-width: 350px;
     width: 100%;
+    max-width: clamp(280px, 92vw, 420px);
+    margin: 0 auto;
 }
 
 .forecast-title {
