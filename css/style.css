@@ -152,7 +152,7 @@ button {
     background: var(--glass);
     padding:0 18px;
     border-radius: var(--radius);
-    max-width: 410px;
+    max-width: 380px;
     width: 100%;
 }
 
