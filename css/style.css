@@ -308,12 +308,10 @@ button {
         grid-template-columns: repeat(5, 1fr);
     }
 
-    .forecast {
-        width: 280px;
-    }
-
+    .left-panel,
+    .forecast, 
     .result {
-        width: 325px;
+        width: 100%;
     }
 }
 
@@ -360,11 +358,11 @@ button {
         gap: 6px;
     }
 
-    /* .left-panel,
+    .left-panel,
     .forecast, 
     .result {
         width: 100%;
-    } */
+    }
 
     .header h1 {
         font-size: 1.35rem;
