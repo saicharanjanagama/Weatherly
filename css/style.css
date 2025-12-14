@@ -308,8 +308,12 @@ button {
         grid-template-columns: repeat(5, 1fr);
     }
 
+    .forecast {
+        width: 280px;
+    }
+
     .result {
-        width: 355px;
+        width: 325px;
     }
 }
 
