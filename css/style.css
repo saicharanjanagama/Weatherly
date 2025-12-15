@@ -153,7 +153,7 @@ button {
     padding:0 18px;
     border-radius: var(--radius);
     width: 100%;
-    max-width: clamp(280px, 92vw, 420px);
+    max-width: clamp(280px, 92vw, 410px);
     margin: 0 auto;
 }
 
@@ -269,7 +269,7 @@ button {
     }
 }
 
-@media (max-width: 700px) {
+@media (max-width: 720px) {
     html {
         font-size: 13.5px;
     }
@@ -308,7 +308,7 @@ button {
     }
 
     .forecast-grid {
-        grid-template-columns: repeat(5, 1fr);
+        grid-template-columns: repeat(auto-fit, minmax(64px, 1fr));
     }
 
     .left-panel,
@@ -322,7 +322,7 @@ button {
     } */
 }
 
-@media (max-width: 400px) {
+@media (max-width: 420px) {
     html {
         font-size: 13px;
     }
@@ -361,7 +361,7 @@ button {
     }
 
     .forecast-grid {
-        grid-template-columns: repeat(5, 1fr);
+        grid-template-columns: repeat(auto-fit, minmax(72px, 1fr));
         gap: 6px;
     }
 
