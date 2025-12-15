@@ -21,7 +21,7 @@
 
 📸 **Preview:**  
 <p align="center">
-  <img src="Screenshot.png" width="700" alt="Task Manager Preview"/>
+  <img src="images/Screenshot.png" width="700" alt="Task Manager Preview"/>
 </p>
 
 ---
