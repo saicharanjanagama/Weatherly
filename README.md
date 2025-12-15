@@ -73,7 +73,7 @@
 
 ---
 
-📂 Project Structure
+## 📂 Project Structure
 
 Weatherly/<br>
 │── index.html<br>
