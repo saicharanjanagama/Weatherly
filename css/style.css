@@ -150,7 +150,8 @@ button {
 .forecast {
     backdrop-filter: blur(10px);
     background: var(--glass);
-    padding:0 18px;
+    padding: 18px;
+    padding-top: 0;
     border-radius: var(--radius);
     width: 100%;
     max-width: clamp(280px, 92vw, 410px);
@@ -221,7 +222,7 @@ button {
 
 
 
-@media (max-width: 900px) {
+/* @media (max-width: 900px) {
     .container {
         position: relative;
         left: 0;
@@ -267,7 +268,7 @@ button {
     .result {
         width: 355px;
     }
-}
+} */
 
 @media (max-width: 720px) {
     html {
@@ -308,7 +309,7 @@ button {
     }
 
     .forecast-grid {
-        grid-template-columns: repeat(auto-fit, minmax(64px, 1fr));
+        /* grid-template-columns: repeat(auto-fit, minmax(64px, 1fr)); */
     }
 
     .left-panel,
@@ -361,7 +362,7 @@ button {
     }
 
     .forecast-grid {
-        grid-template-columns: repeat(auto-fit, minmax(72px, 1fr));
+        /* grid-template-columns: repeat(auto-fit, minmax(72px, 1fr)); */
         gap: 6px;
     }
 
