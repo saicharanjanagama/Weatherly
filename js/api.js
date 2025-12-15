@@ -44,28 +44,39 @@ async function fetchWeather(city) {
   showMessage("Loading...");
 
   try {
-    const geoRes = await fetch(
-      `https://api.openweathermap.org/geo/1.0/direct?q=${city}&limit=1&appid=${API_KEY}`
+    const res = await fetch(
+      `https://api.openweathermap.org/data/2.5/weather?q=${encodeURIComponent(city)}&units=${units}&appid=${API_KEY}`
     );
-    const geoData = await geoRes.json();
 
-    if (!geoData.length) throw new Error("City not found");
+    if (!res.ok) throw new Error("City not found");
 
-    const { lat, lon, name, country } = geoData[0];
+    const data = await res.json();
 
-    fetchWeatherByCoords(lat, lon, name, country);
+    lastLat = data.coord.lat;
+    lastLon = data.coord.lon;
+
+    saveLocation(lastLat, lastLon);
+
+    updateMap(lastLat, lastLon);
+    renderWeather(data);
+    fetchForecast(lastLat, lastLon);
+
+    showMessage("");
 
   } catch (err) {
+    console.error(err);
     showMessage(err.message, true);
     result.hidden = true;
+    document.getElementById("forecast").hidden = true;
   }
 }
+
 
 
 // ------------------------------
 // FETCH WEATHER BY COORDS
 // ------------------------------
-async function fetchWeatherByCoords(lat, lon, customName = null, customCountry = null) {
+async function fetchWeatherByCoords(lat, lon) {
   showMessage("Loading...");
   lastLat = lat;
   lastLon = lon;
@@ -73,32 +84,26 @@ async function fetchWeatherByCoords(lat, lon, customName = null, customCountry =
   saveLocation(lat, lon);
 
   try {
-    const weatherRes = await fetch(
+    const res = await fetch(
       `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&units=${units}&appid=${API_KEY}`
     );
-    const weatherData = await weatherRes.json();
 
-    let name = customName;
-    let country = customCountry;
+    if (!res.ok) throw new Error("Weather fetch failed");
 
-    if (!name) {
-      const revRes = await fetch(
-        `https://api.openweathermap.org/geo/1.0/reverse?lat=${lat}&lon=${lon}&limit=1&appid=${API_KEY}`
-      );
-      const rev = await revRes.json();
-      name = rev[0]?.name || "Unknown";
-      country = rev[0]?.country || "";
-    }
+    const data = await res.json();
 
     updateMap(lat, lon);
-    renderWeather({ ...weatherData, name, sys: { country } });
+    renderWeather(data);
     fetchForecast(lat, lon);
+
     showMessage("");
 
-  } catch {
+  } catch (err) {
+    console.error(err);
     showMessage("Error fetching weather", true);
   }
 }
+
 
 
 // ------------------------------

@@ -56,6 +56,7 @@ function showMessage(msg, error = false) {
 // ------------------------------
 function renderWeather(data) {
   const w = data.weather[0];
+
   weatherIcon.src = `https://openweathermap.org/img/wn/${w.icon}@2x.png`;
   weatherIcon.alt = w.description;
 
@@ -63,11 +64,15 @@ function renderWeather(data) {
   tempEl.textContent = `${Math.round(data.main.temp)}°`;
   feelsLike.textContent = `${Math.round(data.main.feels_like)}°`;
   humidity.textContent = data.main.humidity;
-  locationName.textContent = data.name;
+
+  // ✅ FIXED LOCATION DISPLAY
+  locationName.textContent = `${data.name}${data.sys?.country ? ", " + data.sys.country : ""}`;
 
   wind.textContent = `${(data.wind.speed * 3.6).toFixed(1)} km/h`;
+
   result.hidden = false;
 }
+
 
 
 // ------------------------------
@@ -127,14 +132,34 @@ cityInput.addEventListener("keydown", e => {
 // GEOLOCATION
 // ----------------------------------------------------
 geoBtn.addEventListener("click", () => {
-  if (!navigator.geolocation)
+  if (!navigator.geolocation) {
     return showMessage("Geolocation not supported", true);
+  }
+
+  showMessage("Getting your location...");
 
   navigator.geolocation.getCurrentPosition(
-    pos => fetchWeatherByCoords(pos.coords.latitude, pos.coords.longitude),
-    () => showMessage("Location access denied", true)
+    pos => {
+      const lat = pos.coords.latitude;
+      const lon = pos.coords.longitude;
+
+      // ✅ update map immediately
+      updateMap(lat, lon);
+
+      // ✅ fetch weather
+      fetchWeatherByCoords(lat, lon);
+    },
+    err => {
+      console.error(err);
+      showMessage("Location access denied", true);
+    },
+    {
+      enableHighAccuracy: true,
+      timeout: 10000
+    }
   );
 });
+
 
 // ----------------------------------------------------
 // UNIT TOGGLE (°C ↔ °F) — FULLY WORKING NOW
@@ -155,6 +180,28 @@ unitBtns.forEach(btn => {
 // ------------------------------
 document.addEventListener("DOMContentLoaded", () => {
   restorePreferences(unitBtns);
+
+  // ❌ Always hide weather UI on refresh
   result.hidden = true;
   document.getElementById("forecast").hidden = true;
+  showMessage("");
+
+  // ✅ Only move map to current location
+  if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition(
+      pos => {
+        const lat = pos.coords.latitude;
+        const lon = pos.coords.longitude;
+
+        // ✅ map only (NO weather fetch)
+        updateMap(lat, lon);
+      },
+      () => {
+        // fallback: keep default map view
+      }
+    );
+  }
 });
+
+
+
