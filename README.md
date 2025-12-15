@@ -75,7 +75,7 @@
 
 📂 Project Structure
 
-Portfolio - Sai Charan/<br>
+Weatherly/<br>
 │── index.html<br>
 │── css/<br>
 │    └── style.css<br>
