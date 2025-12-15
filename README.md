@@ -17,7 +17,7 @@
 ---
 
 ## 🚀 Live Demo  
-🔗 **View Project:** [💼 Sai Charan | Portfolio](https://saicharanjanagama.github.io/Portfolio/)
+🔗 **View Project:** [🌦️ Weatherly](https://saicharanjanagama.github.io/Weatherly/)
 
 📸 **Preview:**  
 <p align="center">
